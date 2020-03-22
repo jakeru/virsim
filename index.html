@@ -8,10 +8,13 @@
 
 <div style="width: 95%">
 
+<h1>Changes per day</h1>
 <canvas id="chart1"></canvas>
 
+<h1>Situation each day</h1>
 <canvas id="chart2"></canvas>
 
+<h1>Sum</h1>
 <canvas id="chart3"></canvas>
 
 </div>
@@ -32,16 +35,30 @@
             {
                 label: 'New infections',
                 data: result.map(a => Math.round(a.num_new_infected)),
-                borderWidth: 1
+                fill: false,
+                backgroundColor: "red",
+                borderColor: "red",
             },
             {
                 label: 'New patients in need of ICU',
                 data: result.map(a => Math.round(a.num_new_contagious * params.p_need_care)),
+                fill: false,
+                backgroundColor: "blue",
+                borderColor: "blue",
             },
             {
                 label: 'Lost today',
                 data: result.map(a => Math.round(a.num_new_lost)),
-                borderWidth: 1
+                fill: false,
+                backgroundColor: "black",
+                borderColor: "black",
+            },
+            {
+                label: 'Recovered today',
+                data: result.map(a => Math.round(a.num_new_immune)),
+                fill: false,
+                backgroundColor: "green",
+                borderColor: "green",
             }
             ]
         },
@@ -64,14 +81,23 @@
             {
                 label: 'Infected',
                 data: result.map(a => Math.round(a.num_infected)),
+                fill: false,
+                backgroundColor: "red",
+                borderColor: "red",
             },
             {
                 label: 'Contagious',
                 data: result.map(a => Math.round(a.num_contagious)),
+                fill: false,
+                backgroundColor: "pink",
+                borderColor: "pink",
             },
             {
                 label: 'Need ICU',
                 data: result.map(a => Math.round(a.num_contagious * params.p_need_care)),
+                fill: false,
+                backgroundColor: "blue",
+                borderColor: "blue",
             }
             ]
         },
@@ -94,14 +120,23 @@
             {
                 label: 'Infected so far',
                 data: result.map(a => Math.round(a.num_infected_total)),
+                fill: false,
+                backgroundColor: "red",
+                borderColor: "red",
             },
             {
                 label: 'Lost lives',
                 data: result.map(a => Math.round(a.num_lost)),
+                fill: false,
+                backgroundColor: "black",
+                borderColor: "black",
             },
             {
                 label: 'Need ICU',
                 data: result.map(a => Math.round(a.num_contagious_total * params.p_need_care)),
+                fill: false,
+                backgroundColor: "blue",
+                borderColor: "blue",
             }
             ]
         },
