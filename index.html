@@ -1,0 +1,120 @@
+<html>
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</head>
+
+<body>
+
+<canvas id="chart1" width="400px" height="400px"></canvas>
+
+<canvas id="chart2" width="400px" height="400px"></canvas>
+
+<canvas id="chart3" width="400px" height="400px"></canvas>
+
+<script src="virsim.js"></script>
+
+<script>
+    const params = getParams();
+    let result = runSimulation(params);
+</script>
+
+<script>
+    var chart1 = new Chart(document.getElementById('chart1').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: result.map(a => a.day),
+            datasets: [
+            {
+                label: 'New infections',
+                data: result.map(a => Math.round(a.num_new_infected)),
+                borderWidth: 1
+            },
+            {
+                label: 'New patients in need of ICU',
+                data: result.map(a => Math.round(a.num_new_contagious * params.p_need_care)),
+            },
+            {
+                label: 'Lost today',
+                data: result.map(a => Math.round(a.num_new_lost)),
+                borderWidth: 1
+            }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var chart2 = new Chart(document.getElementById('chart2').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: result.map(a => a.day),
+            datasets: [
+            {
+                label: 'Infected',
+                data: result.map(a => Math.round(a.num_infected)),
+            },
+            {
+                label: 'Contagious',
+                data: result.map(a => Math.round(a.num_contagious)),
+            },
+            {
+                label: 'Need ICU',
+                data: result.map(a => Math.round(a.num_contagious * params.p_need_care)),
+            }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var chart3 = new Chart(document.getElementById('chart3').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: result.map(a => a.day),
+            datasets: [
+            {
+                label: 'Infected so far',
+                data: result.map(a => Math.round(a.num_infected_total)),
+            },
+            {
+                label: 'Lost lives',
+                data: result.map(a => Math.round(a.num_lost)),
+            },
+            {
+                label: 'Need ICU',
+                data: result.map(a => Math.round(a.num_contagious_total * params.p_need_care)),
+            }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+
+<html>
