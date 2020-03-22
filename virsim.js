@@ -67,8 +67,11 @@ function getParams()
         num_infected: 1000,
         // Number of people already immune.
         num_immune: 0,
-        // Basic reproduction number, somewhere between 2 and 3.
-        r0: 1.3,
+        // Basic reproduction number.
+        // Number of new cases for each infected individual.
+        // See https://en.wikipedia.org/wiki/Basic_reproduction_number
+        // for more information in general about this constant.
+        r0: 2.5,
         // Incubation time, in days.
         days_incubation: 4,
         // Number of days contagious after incubation time.
@@ -78,7 +81,7 @@ function getParams()
         // Probability that a life is lost.
         fatality_rate: 0.01,
         // Number of days to simulate.
-        days: 365,
+        days: 90,
         // Size of population.
         num_total: 1000000,
     };
